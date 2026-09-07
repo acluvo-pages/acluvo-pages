@@ -406,6 +406,202 @@ h3 { font-size: 1.45rem; letter-spacing: -0.02em; }
   color: #59e6ff;
 }
 
+.proof-story {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 1.5rem 0 0;
+}
+
+.story-copy {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.story-block {
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  background: rgba(13, 20, 34, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.story-block p {
+  margin: 0.4rem 0 0;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+.story-block.flow p {
+  margin-top: 0.2rem;
+  font-weight: 600;
+}
+
+.mini-label {
+  display: inline-block;
+  color: #59e6ff;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.story-arrow {
+  text-align: center;
+  color: rgba(89,230,255,0.8);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.dashboard-preview {
+  border: 1px solid rgba(89, 230, 255, 0.2);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(10,16,32,0.92), rgba(11,18,30,0.78));
+  box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+  padding: 1.25rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.header-signal {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #59e6ff;
+  box-shadow: 0 0 16px rgba(89, 230, 255, 0.9);
+}
+
+.header-pill {
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(89,230,255,0.12);
+  border: 1px solid rgba(89,230,255,0.2);
+  color: #dfeeff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.header-pill.muted {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+}
+
+.dashboard-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.metric-box {
+  padding: 0.9rem 0.9rem 0.7rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.metric-box span {
+  display: block;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metric-box strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.metric-box.accent {
+  background: linear-gradient(135deg, rgba(89,230,255,0.13), rgba(145,86,255,0.1));
+  border-color: rgba(89,230,255,0.2);
+}
+
+.dashboard-chart {
+  display: flex;
+  align-items: end;
+  gap: 0.75rem;
+  height: 110px;
+  padding: 1rem 0.6rem 0.8rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(18,28,46,0.7), rgba(10,16,26,0.45));
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(180deg, #59e6ff, #6a38ff);
+  box-shadow: 0 10px 22px rgba(106,56,255,0.25);
+}
+
+.bar-1 { height: 35%; }
+.bar-2 { height: 52%; }
+.bar-3 { height: 66%; }
+.bar-4 { height: 74%; }
+.bar-5 { height: 58%; }
+.bar-6 { height: 88%; }
+
+.dashboard-table {
+  margin-top: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.7fr 0.8fr;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  color: rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+}
+
+.table-row:last-child { border-bottom: none; }
+
+.table-row.head {
+  color: rgba(255,255,255,0.9);
+  background: rgba(89,230,255,0.06);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+}
+
+.capability-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.capability-list span {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(20,30,107,.16), rgba(255,255,255,.015));
+  color: #C8D0DD;
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 0.9rem;
+}
+
 .work-grid {
   position: relative;
   z-index: 2;
