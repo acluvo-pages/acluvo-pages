@@ -366,6 +366,161 @@ h3 { font-size: 1.45rem; letter-spacing: -0.02em; }
   background: linear-gradient(180deg, rgba(20,30,107,.16), rgba(5,11,23,0));
 }
 
+#work {
+  position: relative;
+  overflow: hidden;
+}
+
+#work::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(74, 227, 255, 0.08);
+  filter: blur(120px);
+  top: -150px;
+  left: -150px;
+  pointer-events: none;
+}
+
+#work::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(153, 82, 255, 0.08);
+  filter: blur(120px);
+  bottom: -200px;
+  right: -150px;
+  pointer-events: none;
+}
+
+#work .eyebrow {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: #59e6ff;
+}
+
+.work-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.work-card {
+  position: relative;
+  padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+  backdrop-filter: blur(12px);
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(89, 230, 255, 0.35);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25), 0 0 35px rgba(89,230,255,0.08);
+}
+
+.work-card.featured {
+  border-color: rgba(145, 86, 255, 0.35);
+  box-shadow: 0 0 40px rgba(145,86,255,0.07);
+}
+
+.work-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255,255,255,0.05);
+  margin-bottom: 1rem;
+}
+
+.work-tag {
+  color: #59e6ff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.work-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.work-card p {
+  color: rgba(255,255,255,0.70);
+  line-height: 1.7;
+}
+
+.work-features {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work-features li {
+  position: relative;
+  padding: 0.45rem 0 0.45rem 1.2rem;
+  color: rgba(255,255,255,0.78);
+}
+
+.work-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #59e6ff, #985cff);
+  box-shadow: 0 0 10px rgba(89,230,255,0.65);
+}
+
+.work-result {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.work-result span {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.work-result strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.demo-label {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(89,230,255,0.18);
+  border-radius: 20px;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; }
 .about-body blockquote {
   margin: 34px 0 0;
@@ -443,6 +598,7 @@ h3 { font-size: 1.45rem; letter-spacing: -0.02em; }
   .hero-visual { min-height: 360px; }
   .service-grid { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: repeat(2, 1fr); }
+  .work-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {
