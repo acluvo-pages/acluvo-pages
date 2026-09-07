@@ -1,42 +1,13 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Business KPI Dashboard — Demo</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .chart { width: 100%; max-width: 800px; margin-bottom: 32px; }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <h1>Business KPI Dashboard — Demo</h1>
-  <p>Monthly synthetic KPIs (Revenue, Active Users, Conversion rate)</p>
-
-  <canvas id="revenueChart" class="chart" height="120"></canvas>
-  <canvas id="usersChart" class="chart" height="120"></canvas>
-  <canvas id="convChart" class="chart" height="120"></canvas>
-
-  <script>
-    async function loadData() {
-      const res = await fetch('data/kpis.json');
-      return res.json();
-    }
-
-    function months(data){ return data.map(d => d.month); }
-    function series(data, key){ return data.map(d => d[key]); }
-
-    loadData().then(data => {
-      const ctxR = document.getElementById('revenueChart').getContext('2d');
-      new Chart(ctxR, { type:'line', data:{ labels: months(data), datasets:[{ label:'Revenue', data: series(data,'revenue'), borderColor:'#2b8cff', fill:false }]}, options:{ responsive:true }});
-
-      const ctxU = document.getElementById('usersChart').getContext('2d');
-      new Chart(ctxU, { type:'bar', data:{ labels: months(data), datasets:[{ label:'Active Users', data: series(data,'users'), backgroundColor:'#7bc96f' }]}, options:{ responsive:true }});
-
-      const ctxC = document.getElementById('convChart').getContext('2d');
-      new Chart(ctxC, { type:'line', data:{ labels: months(data), datasets:[{ label:'Conversion %', data: series(data,'conversion'), borderColor:'#ff7a59', fill:false }]}, options:{ responsive:true, scales:{ y:{ ticks:{ callback: v=>v+'%' }}}}});
-    }).catch(err => console.error('Failed to load kpis.json', err));
-  </script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Acluvo synthetic Business KPI Command Center capability demo."><title>Business KPI Command Center — Acluvo Demo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../demo.css"></head>
+<body><div class="shell"><nav class="demo-nav"><a class="brand" href="../../index.html"><b>ACLUVO</b> / DEMO LAB</a><a class="back" href="../../index.html#work">← Back to Acluvo</a></nav>
+<header class="hero"><p class="eyebrow">Dashboard & KPI Strategy</p><h1>Business KPI <span class="gradient">Command Center.</span></h1><p class="lede">A synthetic executive dashboard showing how scattered operational measures can be transformed into a single, decision-ready view.</p><div class="notice">Synthetic data · Capability demonstration</div></header>
+<section class="grid kpi-grid"><div class="card kpi"><small>Annual revenue</small><strong id="revenue">—</strong><div class="delta" id="revenueDelta">—</div></div><div class="card kpi"><small>Active users</small><strong id="users">—</strong><div class="delta" id="usersDelta">—</div></div><div class="card kpi"><small>Conversion</small><strong id="conversion">—</strong><div class="delta" id="conversionDelta">—</div></div><div class="card kpi"><small>Reporting status</small><strong>Live</strong><div class="delta">12 monthly periods loaded</div></div></section>
+<section class="grid two-col"><div class="card"><div class="section-title"><h2>Revenue trend</h2><span>Monthly synthetic revenue</span></div><div class="chart-wrap"><svg id="revenueChart" viewBox="0 0 760 290" preserveAspectRatio="none"><defs><linearGradient id="lineGradient" x1="0" x2="1"><stop offset="0" stop-color="#7c45ff"/><stop offset="1" stop-color="#00e5ff"/></linearGradient><linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00e5ff" stop-opacity=".2"/><stop offset="1" stop-color="#7c45ff" stop-opacity="0"/></linearGradient></defs><g class="chart-grid"><line x1="0" y1="40" x2="760" y2="40"/><line x1="0" y1="105" x2="760" y2="105"/><line x1="0" y1="170" x2="760" y2="170"/><line x1="0" y1="235" x2="760" y2="235"/></g><path id="areaPath" class="chart-area"></path><polyline id="linePath" class="chart-line"></polyline></svg></div></div><div class="card"><div class="section-title"><h2>Monthly performance</h2><span>Relative revenue</span></div><div class="bar-list" id="monthBars"></div></div></section>
+<section class="card table-card"><div class="section-title"><h2>KPI detail</h2><span>Decision-ready operating view</span></div><table class="table"><thead><tr><th>Month</th><th>Revenue</th><th>Active users</th><th>Conversion</th><th>Status</th></tr></thead><tbody id="kpiRows"></tbody></table></section>
+<footer class="footer"><span>Acluvo capability demo · synthetic data only</span><a href="../../index.html#contact">Discuss a project →</a></footer></div>
+<script>
+const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+fetch('data/kpis.json').then(r=>r.json()).then(data=>{const first=data[0],last=data[data.length-1],total=data.reduce((s,d)=>s+d.revenue,0);document.querySelector('#revenue').textContent=money(total);document.querySelector('#revenueDelta').textContent=`${Math.round((last.revenue/first.revenue-1)*100)}% Jan → Dec`;document.querySelector('#users').textContent=last.users.toLocaleString();document.querySelector('#usersDelta').textContent=`+${(last.users-first.users).toLocaleString()} vs Jan`;document.querySelector('#conversion').textContent=last.conversion.toFixed(1)+'%';document.querySelector('#conversionDelta').textContent=`+${(last.conversion-first.conversion).toFixed(1)} pts vs Jan`;
+const vals=data.map(d=>d.revenue),min=Math.min(...vals),max=Math.max(...vals),W=760,H=250,top=20;const pts=data.map((d,i)=>{const x=i*(W/(data.length-1));const y=top+(max-d.revenue)/(max-min)*(H-40);return [x,y]});document.querySelector('#linePath').setAttribute('points',pts.map(p=>p.join(',')).join(' '));document.querySelector('#areaPath').setAttribute('d',`M ${pts[0][0]} ${H+20} L ${pts.map(p=>p.join(' ')).join(' L ')} L ${pts.at(-1)[0]} ${H+20} Z`);
+const bars=document.querySelector('#monthBars');data.slice(-6).forEach(d=>bars.insertAdjacentHTML('beforeend',`<div class="bar-row"><span>${d.month}</span><div class="bar-track"><div class="bar-fill" style="width:${d.revenue/max*100}%"></div></div><span class="bar-value">${Math.round(d.revenue/1000)}k</span></div>`));const rows=document.querySelector('#kpiRows');data.forEach(d=>rows.insertAdjacentHTML('beforeend',`<tr><td>${d.month}</td><td>${money(d.revenue)}</td><td>${d.users.toLocaleString()}</td><td>${d.conversion.toFixed(1)}%</td><td><span class="pill ok">Current</span></td></tr>`));}).catch(()=>document.body.insertAdjacentHTML('beforeend','<p style="padding:2rem">Demo data could not be loaded.</p>'));
+</script></body></html>

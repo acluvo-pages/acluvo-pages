@@ -886,3 +886,73 @@ h3 { font-size: 1.45rem; letter-spacing: -0.02em; }
   background: radial-gradient(circle, rgba(0,229,255,.10), rgba(106,56,255,.08) 40%, transparent 70%);
   pointer-events: none;
 }
+
+
+/* Clickable capability demo links */
+.work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(0, 229, 255, 0.34);
+  border-radius: 999px;
+  color: #e6faff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(106,56,255,0.10));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.work-link:hover,
+.work-link:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(0, 229, 255, 0.72);
+  background: linear-gradient(135deg, rgba(0,229,255,0.14), rgba(106,56,255,0.18));
+  box-shadow: 0 0 24px rgba(0,229,255,0.12), 0 0 30px rgba(106,56,255,0.10);
+}
+
+.work-link span {
+  transition: transform 180ms ease;
+}
+
+.work-link:hover span,
+.work-link:focus-visible span {
+  transform: translateX(3px);
+}
+
+/* Demo discovery improvements */
+.demo-hero-link { color: #00e5ff; }
+#work .section-heading { max-width: 850px; }
+#work .section-heading::after {
+  content: "3 INTERACTIVE EXAMPLES";
+  display: inline-flex;
+  margin-top: 1rem;
+  padding: .42rem .68rem;
+  border: 1px solid rgba(0,229,255,.22);
+  border-radius: 999px;
+  color: #9ff6ff;
+  background: rgba(0,229,255,.055);
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .13em;
+}
+.work-link {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 1.35rem;
+  padding: .82rem 1rem;
+  border-color: rgba(0,229,255,.48);
+  background: linear-gradient(110deg, rgba(0,229,255,.13), rgba(106,56,255,.16));
+}
+.work-link::before {
+  content: "LIVE";
+  font-size: .61rem;
+  letter-spacing: .12em;
+  color: #00e5ff;
+}
+.work-card { display: flex; flex-direction: column; }
+.work-card .work-link { margin-top: auto; transform: translateY(1.2rem); }
+.work-card:hover .work-link { border-color: rgba(0,229,255,.8); }
