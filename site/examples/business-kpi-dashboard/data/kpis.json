@@ -1,0 +1,14 @@
+[
+  {"month":"2026-01","revenue":120000,"users":4200,"conversion":2.1},
+  {"month":"2026-02","revenue":132000,"users":4500,"conversion":2.3},
+  {"month":"2026-03","revenue":125000,"users":4700,"conversion":2.0},
+  {"month":"2026-04","revenue":150000,"users":5200,"conversion":2.5},
+  {"month":"2026-05","revenue":162000,"users":5600,"conversion":2.8},
+  {"month":"2026-06","revenue":171000,"users":5900,"conversion":3.0},
+  {"month":"2026-07","revenue":185000,"users":6400,"conversion":3.2},
+  {"month":"2026-08","revenue":178000,"users":6200,"conversion":3.1},
+  {"month":"2026-09","revenue":190000,"users":6600,"conversion":3.4},
+  {"month":"2026-10","revenue":205000,"users":7000,"conversion":3.6},
+  {"month":"2026-11","revenue":198000,"users":6900,"conversion":3.5},
+  {"month":"2026-12","revenue":220000,"users":7500,"conversion":3.8}
+]

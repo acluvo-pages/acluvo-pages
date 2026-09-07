@@ -38,6 +38,10 @@ jobs:
           cp -r examples/business-kpi-dashboard/* site/examples/business-kpi-dashboard/
           cp -r examples/operations-analysis/* site/examples/operations-analysis/
           cp examples/automated-reporting/report.html site/examples/automated-reporting/report.html
+          # Copy per-example redirect pages (if any)
+          if [ -d redirects ]; then
+            cp -r redirects/* site/ || true
+          fi
           # Ensure Jekyll is disabled on Pages branch
           touch site/.nojekyll
           # Create a simple landing page that links to the examples
