@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 import csv
 from collections import defaultdict
+from pathlib import Path
 
-INPUT = 'data/sales.csv'
-OUTPUT = 'report.html'
+# Use paths relative to this script so it works from any working directory
+BASE = Path(__file__).resolve().parent
+INPUT = BASE / 'data' / 'sales.csv'
+OUTPUT = BASE / 'report.html'
 
 def load_sales(path):
     rows = []
