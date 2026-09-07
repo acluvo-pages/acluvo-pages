@@ -40,6 +40,28 @@ jobs:
           cp examples/automated-reporting/report.html site/examples/automated-reporting/report.html
           # Ensure Jekyll is disabled on Pages branch
           touch site/.nojekyll
+          # Create a simple landing page that links to the examples
+          cat > site/index.html <<'HTML'
+          <!doctype html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width,initial-scale=1">
+            <title>Acluvo Examples</title>
+            <style>body{font-family:Arial;margin:24px}ul{line-height:1.6}</style>
+          </head>
+          <body>
+            <h1>Acluvo Examples</h1>
+            <p>Available demo projects:</p>
+            <ul>
+              <li><a href="examples/business-kpi-dashboard/index.html">Business KPI Dashboard</a></li>
+              <li><a href="examples/operations-analysis/index.html">Operations Analysis</a></li>
+              <li><a href="examples/automated-reporting/report.html">Automated Reporting (generated)</a></li>
+            </ul>
+            <p>Visit the links above to open each demo.</p>
+          </body>
+          </html>
+          HTML
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
