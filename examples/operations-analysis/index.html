@@ -1,59 +1,13 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Operations Analysis — Demo</title>
-  <style>body{font-family:Arial;margin:16px}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:6px;text-align:left}thead{background:#f3f3f3}</style>
-</head>
-<body>
-  <h1>Operations Analysis — Demo</h1>
-  <p>Filter by service and status, inspect durations.</p>
-
-  <label>Service: <select id="serviceFilter"><option value="all">All</option></select></label>
-  <label style="margin-left:12px">Status: <select id="statusFilter"><option value="all">All</option></select></label>
-  <button id="apply">Apply</button>
-
-  <h2>Summary</h2>
-  <div id="summary"></div>
-
-  <h2>Events</h2>
-  <table id="events"><thead><tr><th>time</th><th>service</th><th>status</th><th>duration_ms</th><th>message</th></tr></thead><tbody></tbody></table>
-
-  <script>
-    async function load(){
-      const res = await fetch('data/ops.json');
-      return res.json();
-    }
-    function populateFilters(data){
-      const services = [...new Set(data.map(d=>d.service))];
-      const statuses = [...new Set(data.map(d=>d.status))];
-      const sEl = document.getElementById('serviceFilter');
-      services.forEach(s=> sEl.appendChild(new Option(s,s)));
-      const stEl = document.getElementById('statusFilter');
-      statuses.forEach(s=> stEl.appendChild(new Option(s,s)));
-    }
-    function renderTable(rows){
-      const tbody = document.querySelector('#events tbody'); tbody.innerHTML='';
-      rows.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${r.time}</td><td>${r.service}</td><td>${r.status}</td><td>${r.duration_ms}</td><td>${r.message}</td>`; tbody.appendChild(tr) });
-    }
-    function renderSummary(rows){
-      const avg = rows.length ? (rows.reduce((s,r)=>s+r.duration_ms,0)/rows.length).toFixed(1) : 0;
-      const failures = rows.filter(r=>r.status!=='ok').length;
-      document.getElementById('summary').innerText = `Events: ${rows.length} · Avg duration: ${avg}ms · Failures: ${failures}`;
-    }
-
-    let allData = [];
-    load().then(data=>{ allData = data; populateFilters(data); renderSummary(data); renderTable(data); });
-
-    document.getElementById('apply').addEventListener('click', ()=>{
-      const sv = document.getElementById('serviceFilter').value;
-      const st = document.getElementById('statusFilter').value;
-      let rows = allData.slice();
-      if(sv!=='all') rows = rows.filter(r=>r.service===sv);
-      if(st!=='all') rows = rows.filter(r=>r.status===st);
-      renderSummary(rows); renderTable(rows);
-    });
-  </script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Acluvo synthetic operations performance analysis capability demo."><title>Operations Performance Analysis — Acluvo Demo</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../demo.css"></head>
+<body><div class="shell"><nav class="demo-nav"><a class="brand" href="../../index.html"><b>ACLUVO</b> / DEMO LAB</a><a class="back" href="../../index.html#work">← Back to Acluvo</a></nav>
+<header class="hero"><p class="eyebrow">Operations Analytics</p><h1>Operations Performance <span class="gradient">Analysis.</span></h1><p class="lede">An interactive synthetic workflow view designed to surface latency, failures, and operational bottlenecks that deserve attention.</p><div class="notice">Synthetic data · Interactive capability demonstration</div></header>
+<section class="controls card"><label>Service<select id="serviceFilter"><option value="all">All services</option></select></label><label>Status<select id="statusFilter"><option value="all">All statuses</option></select></label><button id="apply">Apply filters</button></section>
+<section class="grid kpi-grid"><div class="card kpi"><small>Events</small><strong id="eventCount">—</strong><div class="delta">Filtered event volume</div></div><div class="card kpi"><small>Average duration</small><strong id="avgDuration">—</strong><div class="delta">Processing latency</div></div><div class="card kpi"><small>Failures</small><strong id="failures">—</strong><div class="delta">Events requiring review</div></div><div class="card kpi"><small>Success rate</small><strong id="successRate">—</strong><div class="delta">Operational health</div></div></section>
+<section class="grid two-col"><div class="card"><div class="section-title"><h2>Service latency</h2><span>Average duration by service</span></div><div class="bar-list" id="serviceBars"></div></div><div class="card"><div class="section-title"><h2>What this surfaces</h2><span>Example interpretation</span></div><p style="color:var(--muted);line-height:1.7;margin-top:0">A decision-ready view makes it easier to identify which services are slow, where errors cluster, and which workflow steps need investigation before they affect customers or downstream teams.</p><div class="notice">Filter the data above to explore</div></div></section>
+<section class="card table-card"><div class="section-title"><h2>Operational events</h2><span>Filtered detail</span></div><table class="table"><thead><tr><th>Time</th><th>Service</th><th>Status</th><th>Duration</th><th>Message</th></tr></thead><tbody id="events"></tbody></table></section>
+<footer class="footer"><span>Acluvo capability demo · synthetic data only</span><a href="../../index.html#contact">Discuss a project →</a></footer></div>
+<script>
+let all=[];const $=s=>document.querySelector(s);fetch('data/ops.json').then(r=>r.json()).then(data=>{all=data;[...new Set(data.map(d=>d.service))].forEach(x=>$('#serviceFilter').add(new Option(x,x)));[...new Set(data.map(d=>d.status))].forEach(x=>$('#statusFilter').add(new Option(x,x)));render(data)});
+function render(rows){const avg=rows.length?rows.reduce((s,r)=>s+r.duration_ms,0)/rows.length:0,fail=rows.filter(r=>r.status!=='ok').length;$('#eventCount').textContent=rows.length;$('#avgDuration').textContent=Math.round(avg)+' ms';$('#failures').textContent=fail;$('#successRate').textContent=(rows.length?((rows.length-fail)/rows.length*100):0).toFixed(0)+'%';const body=$('#events');body.innerHTML='';rows.forEach(r=>body.insertAdjacentHTML('beforeend',`<tr><td>${new Date(r.time).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</td><td>${r.service}</td><td><span class="pill ${r.status==='ok'?'ok':'error'}">${r.status}</span></td><td>${r.duration_ms.toLocaleString()} ms</td><td>${r.message}</td></tr>`));const by={};rows.forEach(r=>(by[r.service]??=[]).push(r.duration_ms));const avgs=Object.entries(by).map(([k,v])=>[k,v.reduce((a,b)=>a+b,0)/v.length]);const max=Math.max(1,...avgs.map(x=>x[1]));const bars=$('#serviceBars');bars.innerHTML='';avgs.sort((a,b)=>b[1]-a[1]).forEach(([name,val])=>bars.insertAdjacentHTML('beforeend',`<div class="bar-row"><span>${name}</span><div class="bar-track"><div class="bar-fill" style="width:${val/max*100}%"></div></div><span class="bar-value">${Math.round(val)}ms</span></div>`))}
+$('#apply').addEventListener('click',()=>{let rows=all;const s=$('#serviceFilter').value,st=$('#statusFilter').value;if(s!=='all')rows=rows.filter(r=>r.service===s);if(st!=='all')rows=rows.filter(r=>r.status===st);render(rows)});
+</script></body></html>
