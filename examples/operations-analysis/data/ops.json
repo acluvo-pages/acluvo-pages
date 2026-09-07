@@ -1,0 +1,12 @@
+[
+  {"time":"2026-09-01T08:12:03Z","service":"auth","status":"ok","duration_ms":42,"message":"login success"},
+  {"time":"2026-09-01T08:12:15Z","service":"payments","status":"ok","duration_ms":310,"message":"charge completed"},
+  {"time":"2026-09-01T08:13:02Z","service":"search","status":"ok","duration_ms":120,"message":"query returned 12 results"},
+  {"time":"2026-09-01T08:14:54Z","service":"auth","status":"error","duration_ms":85,"message":"token exchange failed"},
+  {"time":"2026-09-01T08:15:10Z","service":"jobs","status":"ok","duration_ms":4100,"message":"background job finished"},
+  {"time":"2026-09-01T08:16:22Z","service":"payments","status":"ok","duration_ms":295,"message":"refund issued"},
+  {"time":"2026-09-01T08:17:30Z","service":"search","status":"ok","duration_ms":98,"message":"query returned 3 results"},
+  {"time":"2026-09-01T08:18:44Z","service":"auth","status":"ok","duration_ms":36,"message":"logout"},
+  {"time":"2026-09-01T08:19:12Z","service":"jobs","status":"error","duration_ms":1200,"message":"job failed: timeout"},
+  {"time":"2026-09-01T08:20:01Z","service":"payments","status":"ok","duration_ms":250,"message":"charge completed"}
+]
