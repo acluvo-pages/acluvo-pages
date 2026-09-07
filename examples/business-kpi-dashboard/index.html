@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Business KPI Dashboard — Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .chart { width: 100%; max-width: 800px; margin-bottom: 32px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Business KPI Dashboard — Demo</h1>
+  <p>Monthly synthetic KPIs (Revenue, Active Users, Conversion rate)</p>
+
+  <canvas id="revenueChart" class="chart" height="120"></canvas>
+  <canvas id="usersChart" class="chart" height="120"></canvas>
+  <canvas id="convChart" class="chart" height="120"></canvas>
+
+  <script>
+    async function loadData() {
+      const res = await fetch('data/kpis.json');
+      return res.json();
+    }
+
+    function months(data){ return data.map(d => d.month); }
+    function series(data, key){ return data.map(d => d[key]); }
+
+    loadData().then(data => {
+      const ctxR = document.getElementById('revenueChart').getContext('2d');
+      new Chart(ctxR, { type:'line', data:{ labels: months(data), datasets:[{ label:'Revenue', data: series(data,'revenue'), borderColor:'#2b8cff', fill:false }]}, options:{ responsive:true }});
+
+      const ctxU = document.getElementById('usersChart').getContext('2d');
+      new Chart(ctxU, { type:'bar', data:{ labels: months(data), datasets:[{ label:'Active Users', data: series(data,'users'), backgroundColor:'#7bc96f' }]}, options:{ responsive:true }});
+
+      const ctxC = document.getElementById('convChart').getContext('2d');
+      new Chart(ctxC, { type:'line', data:{ labels: months(data), datasets:[{ label:'Conversion %', data: series(data,'conversion'), borderColor:'#ff7a59', fill:false }]}, options:{ responsive:true, scales:{ y:{ ticks:{ callback: v=>v+'%' }}}}});
+    }).catch(err => console.error('Failed to load kpis.json', err));
+  </script>
+</body>
+</html>

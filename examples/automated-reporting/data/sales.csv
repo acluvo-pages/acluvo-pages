@@ -1,0 +1,11 @@
+order_id,date,region,product,quantity,price
+1001,2026-07-02,North,Product A,3,29.99
+1002,2026-07-05,West,Product B,1,199.00
+1003,2026-07-08,South,Product A,2,29.99
+1004,2026-07-10,East,Product C,5,9.99
+1005,2026-07-15,North,Product B,1,199.00
+1006,2026-07-18,West,Product A,7,29.99
+1007,2026-07-20,South,Product C,10,9.99
+1008,2026-07-25,East,Product B,2,199.00
+1009,2026-07-28,North,Product C,4,9.99
+1010,2026-07-30,West,Product A,6,29.99
